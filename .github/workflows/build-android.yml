@@ -13,8 +13,13 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v3
       with:
-        submodules: true
+        submodules: recursive  # ✅ Ensures all submodules are cloned
         fetch-depth: 0
+
+    - name: Initialize Submodules (Fix Missing SDL2 Issue)
+      run: |
+        git submodule sync --recursive
+        git submodule update --init --recursive
 
     - name: Set up Python
       uses: actions/setup-python@v3
