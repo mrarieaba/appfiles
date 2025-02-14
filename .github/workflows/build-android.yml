@@ -13,7 +13,7 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v3
       with:
-        submodules: false  # ✅ Prevents submodule issues
+        submodules: false  # ✅ Prevents Git submodule issues
         fetch-depth: 0
 
     - name: Set up Python
@@ -32,7 +32,7 @@ jobs:
         pip install buildozer cython python-for-android
         buildozer -v android update  # ✅ Ensure required files are downloaded
 
-    - name: Remove Old Buildozer Cache
+    - name: Remove Old Buildozer Cache & Fix Submodules
       run: |
         rm -rf .buildozer/  # ✅ Remove previous builds to avoid issues
         rm -rf .gitmodules  # ✅ Prevent Git submodule errors
@@ -47,7 +47,6 @@ jobs:
 
     - name: Fix Missing Buildozer Files
       run: |
-        rm -rf .buildozer/  # ✅ Remove old builds
         buildozer -v android clean
         buildozer -v android update
         buildozer -v android sdk install  # ✅ Force install missing Android SDK
