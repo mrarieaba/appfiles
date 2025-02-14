@@ -13,13 +13,8 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v3
       with:
-        submodules: recursive  # ✅ Ensures all submodules are cloned
+        submodules: false  # ✅ Disable submodules since Buildozer manages them
         fetch-depth: 0
-
-    - name: Initialize Submodules (Fix Missing SDL2 Issue)
-      run: |
-        git submodule sync --recursive
-        git submodule update --init --recursive
 
     - name: Set up Python
       uses: actions/setup-python@v3
@@ -36,8 +31,15 @@ jobs:
         pip install --upgrade pip
         pip install buildozer cython
 
+    - name: Remove Old Buildozer Cache
+      run: |
+        rm -rf .buildozer/  # ✅ Remove previous builds to avoid git submodule issues
+
     - name: Initialize Buildozer
       run: buildozer init
+
+    - name: Force Buildozer to Download Dependencies
+      run: buildozer -v android clean
 
     - name: Build APK
       run: buildozer -v android debug
