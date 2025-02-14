@@ -1,0 +1,8 @@
+certifi
+chardet
+docx
+idna
+openai
+requests
+urllib3
+whisper
