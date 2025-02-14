@@ -45,6 +45,10 @@ jobs:
           echo "buildozer.spec already exists. Skipping init."
         fi
 
+    - name: Accept Android SDK Licenses
+      run: |
+        yes | ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
     - name: Fix Missing Buildozer Files
       run: |
         buildozer -v android clean
