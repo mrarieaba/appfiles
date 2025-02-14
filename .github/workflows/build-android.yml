@@ -152,8 +152,6 @@ jobs:
       with:
         name: Android-APK
         path: bin/*.apk
-Å
-
 
 mname: Build Kivy Android APK
 
