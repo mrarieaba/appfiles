@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">MeetingMinutesApp</string>
-    <string name="private_version">2e9ac624ea9960f5de6f523bdfb2f3c538aff059</string>
-    <string name="presplash_color">#000000</string>
-    <string name="urlScheme">kivy</string>
-</resources>
