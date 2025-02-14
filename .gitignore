@@ -1,0 +1,7 @@
+# Ignore virtual environment
+env/
+venv/
+
+# Ignore build artifacts
+bin/
+*.apk
