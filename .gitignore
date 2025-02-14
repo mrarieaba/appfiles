@@ -6,3 +6,4 @@ venv/
 bin/
 *.apk
 .buildozer/
+.buildozer/
