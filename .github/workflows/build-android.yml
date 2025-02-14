@@ -13,7 +13,7 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v3
       with:
-        submodules: false  # ✅ Disable submodules since Buildozer manages them
+        submodules: false  # ✅ Disable submodules since Buildozer handles them
         fetch-depth: 0
 
     - name: Set up Python
@@ -33,10 +33,15 @@ jobs:
 
     - name: Remove Old Buildozer Cache
       run: |
-        rm -rf .buildozer/  # ✅ Remove previous builds to avoid git submodule issues
+        rm -rf .buildozer/  # ✅ Remove previous builds to avoid submodule issues
 
-    - name: Initialize Buildozer
-      run: buildozer init
+    - name: Initialize Buildozer (Only if Missing)
+      run: |
+        if [ ! -f buildozer.spec ]; then
+          buildozer init
+        else
+          echo "buildozer.spec already exists. Skipping init."
+        fi
 
     - name: Force Buildozer to Download Dependencies
       run: buildozer -v android clean
